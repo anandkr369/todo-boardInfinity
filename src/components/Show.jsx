@@ -15,29 +15,35 @@ const TaskList = () => {
 
   const statuses = [
     {
-      title:"TODO",
-      status: "notstarted",
+      title: "TODO",
+      status: "todo",
       textColor: "text-white",
       headerColor: "bg-[#8a30e5]",
     },
     {
-      title:"IN PROGRESS",
+      title: "IN PROGRESS",
       status: "inprogress",
       textColor: "text-black",
       headerColor: "bg-yellow-500",
     },
     {
-      title:"COMPLETED",
+      title: "COMPLETED",
       status: "completed",
       textColor: "text-white",
       headerColor: "bg-green-500",
     },
   ];
+  const Close = (e) => {
+    if (e) {
+      e.stopPropagation();
+    }
+    setSelectedTask(null);
+  };
 
   return (
     <div className="w-screen  flex flex-col items-center justify-between gap-20">
       <div className="flex flex-col sm:flex-row  w-3/4 justify-evenly">
-        {statuses.map(({ status, textColor, bgColor, headerColor,title }, index) => (
+        {statuses.map(({ status, textColor, headerColor, title }, index) => (
           <Section
             key={index}
             status={status}
@@ -50,7 +56,7 @@ const TaskList = () => {
         ))}
       </div>
       <Modal
-        onClose={() => setSelectedTask(null)}
+        onClose={(e) => Close(e)}
         isOpen={!!selectedTask}
         task={selectedTask}
         setTask={setSelectedTask}
@@ -99,7 +105,6 @@ const Section = ({
               key={task.id}
               task={task}
               onTaskClick={onTaskClick}
-              
             />
           ))}
       </div>
@@ -107,19 +112,21 @@ const Section = ({
   );
 };
 
-const Header = ({ textColor, headerColor,title }) => {
+const Header = ({ textColor, headerColor, title }) => {
   return (
     <div
       className={`${headerColor} flex-col justify-center md:flex items-center h-12 pl-4 rounded-t-xl uppercase text-sm `}
     >
-      <div className={` rounded-xl pl-2 pr-2 text-xl font-semibold ${textColor}`}>
+      <div
+        className={` rounded-xl pl-2 pr-2 text-xl font-semibold ${textColor}`}
+      >
         {title}
       </div>
     </div>
   );
 };
 
-const Task = ({ task, onTaskClick, bgColor }) => {
+const Task = ({ task, onTaskClick }) => {
   const [{ isDragging }, drag] = useDrag({
     type: "task",
     item: { id: task.id },
@@ -128,6 +135,21 @@ const Task = ({ task, onTaskClick, bgColor }) => {
     }),
   });
 
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dispatch = useDispatch();
+
+  // Handle status change
+  const handleStatusChange = (newStatus) => {
+    dispatch(updateTask({ ...task, status: newStatus }));
+    setDropdownOpen(false); // Close the dropdown after selection
+  };
+
+  // Stop modal from opening on arrow icon click
+  const handleIconClick = (e) => {
+    e.stopPropagation(); // Prevent the modal from opening
+    setDropdownOpen(!dropdownOpen); // Toggle dropdown visibility
+  };
+
   return (
     <div>
       <div
@@ -135,14 +157,53 @@ const Task = ({ task, onTaskClick, bgColor }) => {
         className={`relative p-3 m-4 shadow-md rounded-xl h-40 hover:bg-gray-200 ${
           isDragging ? "opacity-10" : "opacity-100"
         } cursor-grab `}
-        onClick={() => onTaskClick(task)}
+        onClick={() => onTaskClick(task)} // Click opens the modal, but icon will not trigger this
       >
         <div className="bg-rose-300 text-rose-600 w-fit px-3 py-1 rounded-md">
-          high
+          {task.priority}
         </div>
-        <div className="p-2 font-semibold text-xl flex justify-between">
-          <div>{task.name}</div>
-          <div ><KeyboardArrowDownOutlinedIcon/></div>
+        <div className="p-2  text-xl flex justify-between items-center">
+          <div className="font-semibold">{task.name}</div>
+          <div className="relative">
+            <KeyboardArrowDownOutlinedIcon
+              onClick={handleIconClick}
+              className="cursor-pointer"
+            />
+
+            {dropdownOpen && (
+              <div
+                className="absolute right-0 mt-2 w-60 bg-white shadow-lg rounded-xl border font-semibold border-gray-300 z-10"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <ul className="py-1">
+                  <li
+                    className="px-4 py-2 bg-blue-100 hover:bg-blue-200 cursor-pointer"
+                    onClick={() => handleStatusChange("todo")}
+                  >
+                    Change Status
+                  </li>
+                  <li
+                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                    onClick={() => handleStatusChange("todo")}
+                  >
+                    Todo
+                  </li>
+                  <li
+                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                    onClick={() => handleStatusChange("inprogress")}
+                  >
+                    In Progress
+                  </li>
+                  <li
+                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                    onClick={() => handleStatusChange("completed")}
+                  >
+                    Completed
+                  </li>
+                </ul>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

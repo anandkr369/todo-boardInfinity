@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { addTask } from "../store/tasksSlice";
 import { AiOutlineClose } from "react-icons/ai";
-
+import { PlusCircleFilled } from "@ant-design/icons";
 
 const TaskInput = () => {
   const dispatch = useDispatch();
@@ -13,8 +13,9 @@ const TaskInput = () => {
 
   const [task, setTask] = useState({
     name: "",
-    status: "notstarted",
+    status: "todo",
     description: "",
+    priority: "low",
   });
 
   const handleSubmit = (e) => {
@@ -30,7 +31,7 @@ const TaskInput = () => {
     dispatch(addTask(newTask));
     localStorage.setItem("tasks", JSON.stringify([...tasks, newTask]));
 
-    setTask({ name: "", status: "notstarted", description: "" });
+    setTask({ name: "", status: "todo", description: "", priority: "low" });
     setDisplay(false);
     toast.success("Task added successfully", { autoClose: 2000 });
   };
@@ -49,69 +50,57 @@ const TaskInput = () => {
     <>
       {display ? (
         <div
-          className="fixed top-0 left-0 z-40 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-80"
+          className="fixed top-0 left-0 z-40 w-full h-full flex items-center justify-center bg-gray-400 bg-opacity-80"
           onClick={handlePopClose}
         >
-          <div className="bg-purple-200 rounded-md p-4 w-2/3 h-2/3 flex items-center justify-center relative">
-            <div className="absolute top-10 right-10">
-              <AiOutlineClose
-                onClick={() => setDisplay(false)}
-                className="text-5xl bg-purple rounded-md p-2 text-red hover:bg-rose-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 cursor-pointer"
-              />
-            </div>
-            <div className="w-1/2">
+          <div className="bg-white rounded-md p-4 w-3/6 h-5/6  ">
+            <div className="w-full h-full  ">
               <form
-                className="flex flex-col"
+                className="flex flex-col w-full h-full  justify-between"
                 onSubmit={handleSubmit}
               >
+                <div className="w-full flex justify-between">
+                  <div className="flex gap-5">
+                    <div>
+                      <PlusCircleFilled className="" />
+                    </div>
+                    <div className="font-semibold">Create New Task</div>
+                  </div>
+
+                  <div>
+                    <AiOutlineClose
+                      onClick={handlePopClose}
+                      className="text-3xl rounded-md p-2 flex items-center justify-center hover: hover:bg-rose-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 cursor-pointer "
+                    />
+                  </div>
+                </div>
                 <div className="flex flex-col my-2">
                   <label
-                    className="text-sm max-sm:text-xs text-black"
+                    className="text-sm font-semibold max-sm:text-xs text-black"
                     htmlFor="taskName"
                   >
-                    Task Name:
+                    Title
                   </label>
+
                   <input
-                    className="h-10 w-full bg-gray-100 p-3 rounded-md mb-1 my-1 focus:outline-0 hover:bg-gray-200"
+                    className="h-10 w-full border-2 p-3 rounded-md mb-1 my-1 focus:outline-0 hover:bg-gray-200 "
                     type="text"
-                    placeholder="Task Title"
+                    placeholder="Select here"
                     name="name"
+                    required
                     value={task.name}
                     onChange={(e) => setTask({ ...task, name: e.target.value })}
                   />
                 </div>
                 <div className="flex flex-col my-2">
-                  <div className="flex flex-row justify-between">
-                    <label
-                      className="text-sm max-sm:text-xs text-black"
-                      htmlFor="taskStatus"
-                    >
-                      Task Status:
-                    </label>
-                    <label className="text-sm max-sm:text-xs text-purple-200">
-                      NotStarted / InProgress / Completed
-                    </label>
-                  </div>
-                  <input
-                    className="bg-gray-100 p-2 rounded-md mb-2 my-1 focus:outline-0 hover:bg-gray-200"
-                    type="text"
-                    placeholder="Task Status"
-                    name="status"
-                    value={task.status}
-                    onChange={(e) =>
-                      setTask({ ...task, status: e.target.value })
-                    }
-                  />
-                </div>
-                <div className="flex flex-col my-2">
                   <label
-                    className="text-sm max-sm:text-xs text-black"
-                    htmlFor="taskDescription"
+                    className="text-sm font-semibold max-sm:text-xs text-black"
+                    htmlFor="taskName"
                   >
-                    Task Description:
+                    Description
                   </label>
                   <textarea
-                    className="bg-gray-100 p-2 rounded-md mb-2 my-1 h-32 w-full resize-none focus:outline-0 hover:bg-gray-200"
+                    className=" p-2 border-2 rounded-md mb-2 my-1 min-h-20 w-full resize-none focus:outline-0 hover:bg-gray-200"
                     placeholder="Task Description"
                     name="description"
                     value={task.description}
@@ -120,7 +109,52 @@ const TaskInput = () => {
                     }
                   ></textarea>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex flex-col my-2">
+                  <div className="flex flex-row justify-between">
+                    <label
+                      className="text-sm font-semibold max-sm:text-xs text-black"
+                      htmlFor="taskStatus"
+                    >
+                      Status
+                    </label>
+                  </div>
+                  <select
+                    className="bg-gray-100 p-2 rounded-md mb-2 my-1 focus:outline-0 hover:bg-gray-200"
+                    name="status"
+                    value={task.status}
+                    onChange={(e) =>
+                      setTask({ ...task, status: e.target.value })
+                    }
+                  >
+                    <option value="todo">Todo</option>
+                    <option value="inprogress">In Progress</option>
+                    <option value="completed">Completed</option>
+                  </select>
+                </div>
+                <div className="flex flex-col my-2">
+                  <div className="flex flex-row justify-between">
+                    <label
+                      className="text-sm font-semibold max-sm:text-xs text-black"
+                      htmlFor="taskStatus"
+                    >
+                      Priority
+                    </label>
+                  </div>
+                  <select
+                    className="bg-gray-100 p-2 rounded-md mb-2 my-1 focus:outline-0 hover:bg-gray-200"
+                    name="status"
+                    value={task.priority}
+                    onChange={(e) =>
+                      setTask({ ...task, status: e.target.value })
+                    }
+                  >
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                  </select>
+                </div>
+
+                <div className="flex justify-end">
                   <button
                     type="submit"
                     className="bg-white text-purple-800 hover:border border-green-700 hover:bg-green-500 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-3 py-2 text-center me-2 mb-2"
