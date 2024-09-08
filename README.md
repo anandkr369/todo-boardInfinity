@@ -1,6 +1,6 @@
 # React Todo App 📝
 
-# 🔗 [https://todo-react.vercel.app]
+# 🔗 [https://tudu-react-app.vercel.app]
 
 This project is a fully functional Todo application built with React and Redux. It allows users to manage tasks by adding, updating, and deleting them. The app features a drag-and-drop interface for changing task statuses, and all tasks are persisted in the browser's local storage.
 
