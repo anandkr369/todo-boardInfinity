@@ -1,6 +1,6 @@
 # React Todo App 📝
 
-# 🔗 []
+# 🔗 [https://todo-board-infinity-kappa.vercel.app/]
 
 This project is a dynamic task management application built with React and Redux. It provides a user-friendly interface for managing tasks through features like task creation, updates, and deletions. Users can categorize tasks into different statuses such as TODO, IN PROGRESS, and COMPLETED. The application supports drag-and-drop functionality for reordering tasks and integrates with a Firebase backend service for data persistence. Additionally, interactive modals and notifications enhance user experience, making task management efficient and intuitive.
 
@@ -109,4 +109,4 @@ Selectors: The application uses selectors to access specific pieces of state fro
 **dndTask**: click on the 6 dots icon on task side bar and drag it to the other section
 ## Deployment
 
-The application is deployed on Vercel and can be accessed [here]().
+The application is deployed on Vercel and can be accessed [here](https://todo-board-infinity-kappa.vercel.app/).
