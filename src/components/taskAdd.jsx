@@ -8,7 +8,7 @@ import { PlusCircleFilled } from "@ant-design/icons";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import DateRangeIcon from "@mui/icons-material/DateRange";
-const TaskAdders = () => {
+const TaskAdding = () => {
   const dispatch = useDispatch();
   const [display, setDisplay] = useState(false);
   const [date, setDate] = useState(new Date());
@@ -238,4 +238,4 @@ const toggleCalendar = () => {
   );
 };
 
-export default TaskAdders;
+export default TaskAdding;
