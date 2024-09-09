@@ -6,9 +6,9 @@ import { DndProvider } from "react-dnd";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import { fetchTasks } from "./store/tasksSlice";
 import store from "./store/store";
-import TaskAdder from "./components/taskAdder";
 import TaskList from "./components/TaskSections";
 import Nav from "./components/nav";
+import TaskAdder from "./components/taskAdder";
 
 const App = () => {
   const dispatch = useDispatch();
