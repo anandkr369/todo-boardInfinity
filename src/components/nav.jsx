@@ -1,6 +1,6 @@
 import React from "react";
 
-const Greeting = () => {
+const Nav = () => {
   return (
     <div className="  mx-auto ">
       <div className="flex justify-between items-center">
@@ -16,4 +16,4 @@ const Greeting = () => {
   );
 };
 
-export default Greeting;
+export default Nav;

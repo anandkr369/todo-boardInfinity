@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { updateTask } from "../store/tasksSlice";
 import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
 import EditIcon from "@mui/icons-material/Edit";
-const Task = ({ task, onTaskClick, borderColor,headerColor }) => {
+const TaskDisplayer = ({ task, onTaskClick, borderColor,headerColor }) => {
   const [{ isDragging }, drag] = useDrag({
     type: "task",
     item: { id: task.id },
@@ -124,4 +124,4 @@ const Task = ({ task, onTaskClick, borderColor,headerColor }) => {
     </div>
   );
 };
-export default Task;
+export default TaskDisplayer;

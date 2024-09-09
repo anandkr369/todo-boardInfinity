@@ -6,8 +6,8 @@ import { DndProvider } from "react-dnd";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import { setTasks } from "./store/tasksSlice";
 import store from "./store/store";
-import TaskInput from "./components/Add";
-import TaskList from "./components/Show";
+import TaskInput from "./components/TaskAdder";
+import TaskList from "./components/TaskSections";
 import Greeting from "./components/nav";
 
 const App = () => {

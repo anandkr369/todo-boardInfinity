@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import Modal from "./Modal";
+import Modal from "./updaterModal";
 import Section from "./section";
 
-const TaskList = () => {
+const TaskSections = () => {
   const tasks = useSelector((state) => state.tasks.tasks || []);
   const [selectedTask, setSelectedTask] = useState(null);
-
   const handleTaskClick = (task) => {
     setSelectedTask(task);
   };
@@ -69,4 +68,4 @@ const TaskList = () => {
   );
 };
 
-export default TaskList;
+export default TaskSections;

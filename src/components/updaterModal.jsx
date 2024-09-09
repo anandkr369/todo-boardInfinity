@@ -130,16 +130,16 @@ const Modal = ({ onClose, isOpen, task, setTask }) => {
                   <option value="high">High</option>
                 </select>
               </div>
-              <div className="flex justify-end">
+              <div className="flex justify-end gap-4">
                 <button
                   onClick={handleUpdateTask}
-                  className="bg-white text-purple-800 text-ls hover: border border-purple-700 hover:bg-purple-500 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-3 py-2 text-center me-2 mb-2 dark:border-purple-400 dark:text-purple-400 dark:hover: dark:hover:bg-purple-500 dark:focus:ring-purple-900"
+                  className="bg-white text-purple-800 hover:text-white text-ls hover: border border-purple-700 hover:bg-purple-500 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2 text-center me-2 mb-2 dark:border-purple-400 dark:text-purple-400 dark:hover: dark:hover:bg-purple-500 dark:focus:ring-purple-900"
                 >
                   Update
                 </button>
                 <button
                   onClick={handleDeleteTask}
-                  className="bg-white text-purple-800 text-ls hover: border border-red-700 hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 text-center me-2 mb-2 dark:border-purple-400 dark:text-purple-400 dark:hover: dark:hover:bg-purple-500 dark:focus:ring-purple-900"
+                  className="hover:bg-red-600 bg-red-500 text-white text-ls hover: border border-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2 text-center me-2 mb-2 dark:border-purple-400 dark:text-purple-400 dark:hover: dark:hover:bg-purple-500 dark:focus:ring-purple-900"
                 >
                   Delete
                 </button>

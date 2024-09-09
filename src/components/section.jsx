@@ -2,8 +2,8 @@ import { useDrop } from "react-dnd";
 import { useDispatch } from "react-redux";
 import { updateTask } from "../store/tasksSlice";
 
-import Task from "./task";
-import Header from "./header";
+import Task from "./TaskDisplayer";
+import Header from "./SectionHeaders";
 
 const Section = ({
   status,
