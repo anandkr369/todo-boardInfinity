@@ -4,6 +4,10 @@
 
 This project is a dynamic task management application built with React and Redux. It provides a user-friendly interface for managing tasks through features like task creation, updates, and deletions. Users can categorize tasks into different statuses such as TODO, IN PROGRESS, and COMPLETED. The application supports drag-and-drop functionality for reordering tasks and integrates with a Firebase backend service for data persistence. Additionally, interactive modals and notifications enhance user experience, making task management efficient and intuitive.
 
+# Notion document:
+
+  read the Notion document here--[https://low-cod-fd2.notion.site/TODO-board-infinity-ada46789bb22427ba73ccb800282498b]
+
 # Tech Stack 💻:
 
 - **Frontend**: React.js, Tailwind CSS
@@ -94,19 +98,19 @@ todo-app/
 
 -**Redux Toolkit**:
 
-Purpose: Redux Toolkit is used for managing the application's state in a predictable way. It simplifies the process of setting up a Redux store and provides tools for writing Redux logic more efficiently.
-Setup: The store.js file configures the Redux store, integrating slices for tasks and other potential states.
-Tasks Slice: The tasksSlice.js file defines the state structure for tasks and includes reducers and actions for handling task-related operations such as fetching, updating, adding, and deleting tasks.
-Thunks: Asynchronous operations such as fetching tasks from an API are handled using thunk actions in the tasksSlice.js file.
-Selectors: The application uses selectors to access specific pieces of state from the Redux store. For example, useSelector is used in components to retrieve tasks and manage their display.
+-Purpose: Redux Toolkit is used for managing the application's state in a predictable way. It simplifies the process of setting up a Redux store and provides tools for writing Redux logic more efficiently.
+-Setup: The store.js file configures the Redux store, integrating slices for tasks and other potential states.
+-Tasks Slice: The tasksSlice.js file defines the state structure for tasks and includes reducers and actions for handling task-related operations such as fetching, updating, adding, and deleting tasks.
+-Thunks: Asynchronous operations such as fetching tasks from an API are handled using thunk actions in the tasksSlice.js file.
+-Selectors: The application uses selectors to access specific pieces of state from the Redux store. For example, useSelector is used in components to retrieve tasks and manage their display.
 
 
 #### Actions:
 
-**addTask**: Adds a new task to the state which gets saved to firebase database.
-**updateTask**: Updates an existing task based on its id.
-**deleteTask**: Removes a task from the state by its id.
-**dndTask**: click on the 6 dots icon on task side bar and drag it to the other section
+-**addTask**: Adds a new task to the state which gets saved to firebase database.
+-**updateTask**: Updates an existing task based on its id.
+-**deleteTask**: Removes a task from the state by its id.
+-**dndTask**: click on the 6 dots icon on task side bar and drag it to the other section
 ## Deployment
 
 The application is deployed on Vercel and can be accessed [here](https://todo-board-infinity-kappa.vercel.app/).
