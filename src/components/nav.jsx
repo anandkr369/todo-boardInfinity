@@ -4,7 +4,7 @@ const Nav = () => {
   return (
     <div className="  mx-auto ">
       <div className="flex justify-between items-center">
-        <div className="  ">
+        <div>
           <img
             src="/board.png"
             alt=""

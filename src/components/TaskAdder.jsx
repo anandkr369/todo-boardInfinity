@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { addTask } from "../store/tasksSlice";
 import { AiOutlineClose } from "react-icons/ai";
@@ -10,7 +10,6 @@ import "react-calendar/dist/Calendar.css";
 import DateRangeIcon from "@mui/icons-material/DateRange";
 const TaskAdder = () => {
   const dispatch = useDispatch();
-  const tasks = useSelector((state) => state.tasks.tasks);
   const [display, setDisplay] = useState(false);
   const [date, setDate] = useState(new Date());
    const [isCalendarOpen, setIsCalendarOpen] = useState(false);
@@ -33,7 +32,6 @@ const TaskAdder = () => {
     }
     const newTask = { ...task, id: uuidv4(), date: date.toLocaleDateString() };
     dispatch(addTask(newTask));
-    localStorage.setItem("tasks", JSON.stringify([...tasks, newTask]));
 
     setTask({
       name: "",

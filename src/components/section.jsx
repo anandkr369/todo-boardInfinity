@@ -1,9 +1,9 @@
 import { useDrop } from "react-dnd";
 import { useDispatch } from "react-redux";
 import { updateTask } from "../store/tasksSlice";
-
-import Task from "./TaskDisplayer";
 import Header from "./SectionHeaders";
+import TaskDisplayer from "./TaskDisplayer";
+
 
 const Section = ({
   status,
@@ -15,10 +15,19 @@ const Section = ({
   borderColor,
 }) => {
   const dispatch = useDispatch();
+  const moveTask = (taskId, newStatus) => (dispatch, getState) => {
+    const tasks = getState().tasks.tasks;
+    const task = tasks.find((t) => t.id === taskId);
+    if (task) {
+      const updatedTask = { ...task, status: newStatus };
+      dispatch(updateTask(updatedTask));
+    }
+  };
+
   const [{ isOver }, drop] = useDrop({
     accept: "task",
     drop: (item) => {
-      dispatch(updateTask({ id: item.id, status }));
+      dispatch(moveTask(item.id, status));
     },
     collect: (monitor) => ({
       isOver: !!monitor.isOver(),
@@ -42,7 +51,7 @@ const Section = ({
         />
         {filteredTasks.length > 0 &&
           filteredTasks.map((task) => (
-            <Task
+            <TaskDisplayer
               key={task.id}
               task={task}
               onTaskClick={onTaskClick}

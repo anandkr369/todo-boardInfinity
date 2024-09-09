@@ -19,6 +19,7 @@ const TaskDisplayer = ({ task, onTaskClick, borderColor,headerColor }) => {
   const dispatch = useDispatch();
 
   const handleStatusChange = (newStatus) => {
+    task.status=newStatus;
     dispatch(updateTask({ ...task, status: newStatus }));
     setDropdownOpen(false);
   };

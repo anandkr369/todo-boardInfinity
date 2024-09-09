@@ -1,14 +1,20 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState,useEffect } from "react";
+import { useSelector,useDispatch } from "react-redux";
+import { fetchTasks } from "../store/tasksSlice";
 import Modal from "./updaterModal";
 import Section from "./section";
 
 const TaskSections = () => {
+  const dispatch = useDispatch();
   const tasks = useSelector((state) => state.tasks.tasks || []);
   const [selectedTask, setSelectedTask] = useState(null);
   const handleTaskClick = (task) => {
     setSelectedTask(task);
   };
+
+  useEffect(() => {
+    dispatch(fetchTasks());
+  }, [dispatch]);
 
   const statuses = [
     {

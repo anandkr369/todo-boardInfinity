@@ -1,21 +1,16 @@
 import { AiOutlineClose } from "react-icons/ai";
 import { createPortal } from "react-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { updateTask, deleteTask } from "../store/tasksSlice";
 import { PlusCircleFilled } from "@ant-design/icons";
 
 const Modal = ({ onClose, isOpen, task, setTask }) => {
   const dispatch = useDispatch();
-  const tasks = useSelector((state) => state.tasks.tasks);
 
   const handleUpdateTask = (e) => {
     e.preventDefault();
     dispatch(updateTask(task));
-    localStorage.setItem(
-      "tasks",
-      JSON.stringify(tasks.map((t) => (t.id === task.id ? task : t)))
-    );
     toast.success("Task updated successfully", { autoClose: 2000 });
     onClose();
   };
@@ -23,10 +18,6 @@ const Modal = ({ onClose, isOpen, task, setTask }) => {
   const handleDeleteTask = (e) => {
     e.preventDefault();
     dispatch(deleteTask(task.id));
-    localStorage.setItem(
-      "tasks",
-      JSON.stringify(tasks.filter((t) => t.id !== task.id))
-    );
     toast.success("Task deleted successfully", { autoClose: 2000 });
     onClose();
   };
