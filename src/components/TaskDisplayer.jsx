@@ -19,15 +19,16 @@ const TaskDisplayer = ({ task, onTaskClick, borderColor }) => {
   const dispatch = useDispatch();
 
   const handleStatusChange = (newStatus) => {
-    task.status=newStatus;
-    dispatch(updateTask({ ...task, status: newStatus }));
+    const updatedTask = { ...task, status: newStatus };
+
+    dispatch(updateTask(updatedTask));
+
     setDropdownOpen(false);
   };
 
-  
   const handleIconClick = (e) => {
-    e.stopPropagation(); 
-    setDropdownOpen(!dropdownOpen); 
+    e.stopPropagation();
+    setDropdownOpen(!dropdownOpen);
   };
 
   return (
@@ -116,7 +117,9 @@ const TaskDisplayer = ({ task, onTaskClick, borderColor }) => {
           </div>
           <div
             ref={drag}
-            className={`flex justify-end items-center  ${isDragging?`cursor-grabbing`:`cursor-grab`}`}
+            className={`flex justify-end items-center  ${
+              isDragging ? `cursor-grabbing` : `cursor-grab`
+            }`}
           >
             <DragIndicatorOutlined />
           </div>
