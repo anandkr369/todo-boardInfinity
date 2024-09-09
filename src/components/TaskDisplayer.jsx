@@ -44,7 +44,7 @@ const TaskDisplayer = ({ task, onTaskClick, borderColor,headerColor }) => {
             {task.priority}
           </div>
           <div
-            className={`mt-2 mr-2 cursor-pointer hover:${headerColor} `}
+            className={`mt-2 mr-2 cursor-pointer`}
             onClick={() => onTaskClick(task)}
           >
             <EditIcon fontSize="small" />

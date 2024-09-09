@@ -47,7 +47,7 @@ const TaskSections = () => {
   };
 
   return (
-    <div className="w-screen  flex flex-col items-center justify-between gap-20 ">
+    <div className="w-full  flex flex-col items-center justify-between gap-20 ">
       <div className="flex flex-col sm:flex-row  w-3/4 justify-evenly">
         {statuses.map(
           ({ status, textColor, headerColor, title, borderColor }, index) => (

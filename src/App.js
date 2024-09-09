@@ -15,15 +15,15 @@ const App = () => {
   useSelector((state) => state.tasks.tasks);
 
   useEffect(() => {
-    
-    
+    const loadTasks = async () => {
       try {
-        dispatch(fetchTasks());
-
+        await dispatch(fetchTasks());
       } catch (error) {
-        toast.error("Error parsing tasks from firebase:",{autoClose:2000});
+        toast.error("Error fetching tasks from Firebase", { autoClose: 2000 });
       }
-    
+    };
+
+    loadTasks();
   }, [dispatch]);
 
   return (

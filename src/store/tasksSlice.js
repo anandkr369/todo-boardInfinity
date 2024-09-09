@@ -65,7 +65,7 @@ export const addTask = (task) => async (dispatch) => {
 export const updateTask = (task) => async (dispatch) => {
   try {
     const taskRef = doc(db, "tasks", task.id);
-    await updateDoc(taskRef, { status: task.status }); // Only update the status field
+    await updateDoc(taskRef, { status: task.status });
     dispatch(tasksSlice.actions.updateTask(task));
   } catch (error) {
     console.error("Error updating task:", error);

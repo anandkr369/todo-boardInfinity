@@ -51,6 +51,7 @@ const TaskAdder = () => {
   const handlePopClose = (e) => {
     if (e.target === e.currentTarget) {
       setDisplay(false);
+      setDate(new Date());
     }
   };
 
@@ -85,6 +86,7 @@ const toggleCalendar = () => {
 
                   <div>
                     <AiOutlineClose
+                    aria-label="close"
                       onClick={handlePopClose}
                       className="text-3xl rounded-md p-2 flex items-center justify-center hover:bg-rose-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 cursor-pointer"
                     />
