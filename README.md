@@ -1,32 +1,33 @@
 # React Todo App 📝
 
-# 🔗 [https://tudu-react-app.vercel.app]
+# 🔗 []
 
-This project is a fully functional Todo application built with React and Redux. It allows users to manage tasks by adding, updating, and deleting them. The app features a drag-and-drop interface for changing task statuses, and all tasks are persisted in the browser's local storage.
+This project is a dynamic task management application built with React and Redux. It provides a user-friendly interface for managing tasks through features like task creation, updates, and deletions. Users can categorize tasks into different statuses such as TODO, IN PROGRESS, and COMPLETED. The application supports drag-and-drop functionality for reordering tasks and integrates with a Firebase backend service for data persistence. Additionally, interactive modals and notifications enhance user experience, making task management efficient and intuitive.
 
 # Tech Stack 💻:
 
 - **Frontend**: React.js, Tailwind CSS
 - **State Management**: Redux Toolkit
-- **Utilities**: React Icons, React Toastify
-
+- **Utilities**: React Toastify,React DnD (Drag and Drop), React Calendar
+- **Backend**: firebase
 # Features 🗒:
 
-- **Add Tasks ⚡**: Users can add new tasks with a name, description, and status.
-- **Update Tasks ✔️**: Existing tasks can be edited and updated.
-- **Delete Tasks ➿**: Users can delete tasks they no longer need.
-- **Drag and Drop ✏️**: Tasks can be reordered using drag and drop functionality.
-- **Responsive Design📱**: The app is fully responsive, making it usable on various devices.
+- **Add Tasks ⚡**: Users can create new tasks by providing a title, description, status, priority, and due date.Users can create new tasks by providing a title, description, status, priority, and due date.
+- **Update Tasks ✔️**: Existing tasks can be edited to update their title, description, status, priority.
+- **Delete Tasks ➿**:  Users can remove tasks that are no longer needed.
+
+- **Drag and Drop ✏️**: Users can select and set due dates for tasks using an interactive calendar.
+- **Responsive Design📱**: The app is fully responsive and optimized for various screen sizes and devices.
 
 ## Installation
 
 1. Clone the repository:
    ```
-   git clone https://github.com/0ujjwal0/todo_react.git
+   git clone https://github.com/0ujjwal0/TODO-Board-Infinity
    ```
 2. Navigate to the project directory:
    ```
-   cd todo_react
+   cd TODO-Board-Infinity
    ```
 3. Install the dependencies:
    ```
@@ -51,13 +52,14 @@ todo-app/
 ├── src/
 │   ├── assets/
 │   ├── components/
-│   │   ├── Greeting.jsx
-│   │   ├── Modal.jsx
-│   │   ├── TaskInput.jsx
-│   │   └── TaskList.jsx
-│   │
-│   ├── pages/
-│   │   └── Home.jsx
+│   │   ├── nav.jsx
+│   │   ├── section.jsx
+│   │   ├── sectionHeaders.jsx
+│   │   └── Taskadder.jsx
+├   |   |-- taskDisplayer.jsx
+│   │   ├── tasksections.jsx
+│   │   ├── updatermodal.jsx
+│   │    
 │   │
 │   ├── store/
 │   │   ├── tasksSlice.js
@@ -65,7 +67,7 @@ todo-app/
 │   │
 │   ├── App.jsx
 │   ├── index.js
-│   └── ...
+│   └── firebase.js
 │
 ├── package.json
 └── README.md
@@ -73,37 +75,38 @@ todo-app/
 
 ### **Components Documentation**
 
-- **Modal Component**:
-  Purpose: The Modal component is used for updating or deleting tasks. It opens as a modal dialog when a task is being edited or deleted.
-  Props: Receives onClose, isOpen, task, and setTask to control the modal's behavior and manage the task data.
-  State Management: Uses Redux to dispatch actions for updating or deleting tasks.
+- **Tasks Sections Component**:
+  Purpose: The TaskSections component displays tasks organized by their status. It categorizes tasks into sections such as "Todo", "In Progress", and "Completed" for better organization and management.
+  Props: Receives status to filter and display tasks according to their current status.
+  State Management: Uses useSelector from React Redux to access tasks from the Redux store.
 
-- **Task List Component**:
-  Purpose: The TaskList component displays a list of tasks filtered by their status.
-  Props: Receives status to filter the tasks displayed.
-  State Management: Uses useSelector to access the tasks from the Redux store
-
-- **Tasks Input Component**:
-  Purpose: The TaskInput component handles the creation of new tasks with a form that accepts the task's name, status, and description.
-  State Management: Uses useState for local state and useDispatch for Redux actions.
-  Validation: Displays an error message if the task name is empty.
-- **Greetings Component**:
-  Purpose: The Greeting component displays a greeting based on the time of day along with the current date.
-  Props: None.
-  Output: A styled header that changes greetings according to the time (e.g., "Good morning", "Good afternoon").
+- **Task Adder Component**:
+  Purpose: The TaskAdder component handles the creation of new tasks. It provides a form that allows users to input a task's name, description, and status.
+  State Management: Utilizes useState for managing local state and useDispatch for dispatching Redux actions to add new tasks.
+  Validation: Ensures that a task's name is provided before allowing submission.
+- **UpdaterModal Component**:
+  Purpose: The UpdaterModal component is used for updating or deleting tasks. It opens as a modal dialog when a task is being edited or deleted, allowing users to modify task details or remove the task 
+  from the list.
+  Props: Receives onClose, isOpen, task, and setTask to manage the modal's visibility and handle task updates or deletions.
+  State Management: Utilizes Redux to dispatch actions for updating or deleting tasks. It uses useDispatch from React Redux to interact with the Redux store.
 
 ### **State Management**
 
-- **Redux Store**: The application uses Redux Toolkit for state management. The global state is managed in the `store.js` file, and individual pieces of state, like tasks, are managed in slices.
+-**Redux Toolkit**:
 
-- **Tasks Slice**: The `tasksSlice.js` handles the core actions for managing tasks in the application.
+Purpose: Redux Toolkit is used for managing the application's state in a predictable way. It simplifies the process of setting up a Redux store and provides tools for writing Redux logic more efficiently.
+Setup: The store.js file configures the Redux store, integrating slices for tasks and other potential states.
+Tasks Slice: The tasksSlice.js file defines the state structure for tasks and includes reducers and actions for handling task-related operations such as fetching, updating, adding, and deleting tasks.
+Thunks: Asynchronous operations such as fetching tasks from an API are handled using thunk actions in the tasksSlice.js file.
+Selectors: The application uses selectors to access specific pieces of state from the Redux store. For example, useSelector is used in components to retrieve tasks and manage their display.
+
 
 #### Actions:
 
-**addTask**: Adds a new task to the state.
+**addTask**: Adds a new task to the state which gets saved to firebase database.
 **updateTask**: Updates an existing task based on its id.
 **deleteTask**: Removes a task from the state by its id.
-
+**dndTask**: click on the 6 dots icon on task side bar and drag it to the other section
 ## Deployment
 
-The application is deployed on Vercel and can be accessed [here](https://todo-react-app.vercel.app/).
+The application is deployed on Vercel and can be accessed [here]().
