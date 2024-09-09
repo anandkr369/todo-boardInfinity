@@ -98,11 +98,11 @@ todo-app/
 
 -**Redux Toolkit**:
 
--Purpose: Redux Toolkit is used for managing the application's state in a predictable way. It simplifies the process of setting up a Redux store and provides tools for writing Redux logic more efficiently.
--Setup: The store.js file configures the Redux store, integrating slices for tasks and other potential states.
--Tasks Slice: The tasksSlice.js file defines the state structure for tasks and includes reducers and actions for handling task-related operations such as fetching, updating, adding, and deleting tasks.
--Thunks: Asynchronous operations such as fetching tasks from an API are handled using thunk actions in the tasksSlice.js file.
--Selectors: The application uses selectors to access specific pieces of state from the Redux store. For example, useSelector is used in components to retrieve tasks and manage their display.
+-**Purpose**: Redux Toolkit is used for managing the application's state in a predictable way. It simplifies the process of setting up a Redux store and provides tools for writing Redux logic more efficiently.
+-**Setup**: The store.js file configures the Redux store, integrating slices for tasks and other potential states.
+-**Tasks Slice**: The tasksSlice.js file defines the state structure for tasks and includes reducers and actions for handling task-related operations such as fetching, updating, adding, and deleting tasks.
+-**Thunks**: Asynchronous operations such as fetching tasks from an API are handled using thunk actions in the tasksSlice.js file.
+-**Selectors**: The application uses selectors to access specific pieces of state from the Redux store. For example, useSelector is used in components to retrieve tasks and manage their display.
 
 
 #### Actions:
