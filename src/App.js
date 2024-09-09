@@ -8,7 +8,8 @@ import { fetchTasks } from "./store/tasksSlice";
 import store from "./store/store";
 import TaskList from "./components/TaskSections";
 import Nav from "./components/nav";
-import TaskAdder from "./components/taskAdder";
+import TaskAdders from "./components/taskAdder";
+
 
 const App = () => {
   const dispatch = useDispatch();
@@ -36,7 +37,7 @@ const App = () => {
             <Nav />
           </div>
 
-          <TaskAdder />
+          <TaskAdders />
           <div>
             <TaskList />
           </div>
